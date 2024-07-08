@@ -13,15 +13,6 @@ import (
 	"github.com/hegedustibor/htgo-tts/handlers"
 )
 
-/**
- * Required:
- * - mplayer
- *
- * Use:
- *
- * speech := htgotts.Speech{Folder: "audio", Language: "en", Handler: MPlayer}
- */
-
 // Speech struct
 type Speech struct {
 	Folder   string
@@ -58,7 +49,6 @@ func (speech *Speech) PlaySpeechFile(fileName string) error {
 
 // Speak downloads speech and plays it using mplayer
 func (speech *Speech) Speak(text string) error {
-
 	var err error
 	generatedHashName := speech.generateHashName(text)
 
@@ -70,9 +60,6 @@ func (speech *Speech) Speak(text string) error {
 	return speech.PlaySpeechFile(fileName)
 }
 
-/**
- * Create the folder if does not exists.
- */
 func (speech *Speech) createFolderIfNotExists(folder string) error {
 	dir, err := os.Open(folder)
 	if os.IsNotExist(err) {
@@ -83,9 +70,6 @@ func (speech *Speech) createFolderIfNotExists(folder string) error {
 	return nil
 }
 
-/**
- * Download the voice file if does not exists.
- */
 func (speech *Speech) downloadIfNotExists(fileName string, text string) error {
 	f, err := os.Open(fileName)
 	if err != nil {
@@ -117,9 +101,7 @@ func (speech *Speech) generateHashName(name string) string {
 }
 
 func (speech *Speech) urlResponse(dlUrl string, f *os.File) (resp *http.Response, err error) {
-	var (
-		response *http.Response
-	)
+	var response *http.Response
 
 	if speech.Proxy != "" {
 		var proxyURL *url.URL
