@@ -15,7 +15,7 @@ func main() {
 		Handler:  &handlers.MPlayer{},
 	}
 
-	err := speech.Speak("Awesome! Is there anything specific you'd like to talk about or need help with?")
+	err := speech.Speak("Hello there")
 	if err != nil {
 		log.Fatal(err)
 	}
